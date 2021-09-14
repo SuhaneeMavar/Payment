@@ -1,11 +1,12 @@
+if(process.env.NODE_ENV!='production')
+    require('dotenv').config()
 const app=require('./config/express')
 const express=require('express')
 const config=require('./config/config')
 const users=require('./routes/user.route')
-const poems=require('./routes/poem.route')
+const payments=require('./routes/payment.route')
 const auth=require('./routes/auth.route')
 const helmet=require('helmet')
-const path=require('path')
 const cookieParser= require('cookie-parser')
 require('./config/mongoose')
 
@@ -18,12 +19,9 @@ app.use(cookieParser())
 
 //redirect to the routes
 app.use('/users',users)
-app.use('/poems',poems)
+app.use('/payments',payments)
 app.use('/auth',auth)
 
-// app.get('/',(req,res)=>{
-//         res.render(path.join(__dirname,'../public/index.html'))
-// })
 
 app.listen(config.port,()=>{
     console.log('Server is running at port:'+config.port);

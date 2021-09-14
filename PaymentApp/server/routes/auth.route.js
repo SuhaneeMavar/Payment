@@ -28,6 +28,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
+//get authenticated user
 router.get('/authenticate', authenticate, async (req, res) => {
     const verify=jwt.verify(req.headers.authentication,config.TOKEN_SECRET)
     const userId = verify._id

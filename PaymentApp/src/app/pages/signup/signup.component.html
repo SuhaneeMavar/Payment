@@ -1,0 +1,65 @@
+<main>
+  <section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 shape-light">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="container pt-lg-md">
+      <div class="row justify-content-center py-5 my-5">
+        <div class="col-lg-5">
+          <div class="card bg-white shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+              <h1 class="text-center my-5">Sign Up</h1>
+              <form role="form" #form="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group" [ngClass]="{'focused':focus===true}">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                    </div>
+                    <input class="form-control" name='name' #name="ngModel" required [(ngModel)]="user.userName"
+                      pattern="[a-zA-Z ]{3,30}" placeholder="Name" type="text" (focus)="focus=true"
+                      (blur)="focus=false">
+                  </div>
+
+                  <small class="text-danger" *ngIf='name.errors?.required && name.touched'>Name is required</small>
+                  <small class="text-danger" *ngIf='name.errors?.pattern && name.touched'>Name is invalid</small>
+                </div>
+                <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" name='email' #email="ngModel" required [(ngModel)]="user.email"
+                      placeholder="Email" type="email" (focus)="focus1=true" email (blur)="focus1=false">
+                  </div>
+                  <small class="text-danger" *ngIf='email.errors?.required && email.touched'>Email is required</small>
+                  <small class="text-danger" *ngIf='email.errors?.email && email.touched'>Email is invalid</small>
+                </div>
+                <div class="form-group" [ngClass]="{'focused':focus2===true}">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" name='psw' #psw="ngModel" required [(ngModel)]="user.password"
+                      placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                  </div>
+                  <small class="text-danger" *ngIf='psw.errors?.required && psw.touched'>Password is required</small>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" [disabled]='form.invalid' class="btn btn-primary mt-4">Create account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

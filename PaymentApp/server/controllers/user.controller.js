@@ -7,7 +7,7 @@ const userSchema = {
     userName: Joi.string().min(3).max(30).required(),
     email: Joi.string().min(3).max(30).required().email(),
     bio: Joi.string().required(),
-    password: Joi.string().min(8).max(8).required()
+    password: Joi.string().min(0).max(8).required()
 }
 
 //methods
@@ -15,14 +15,14 @@ module.exports.addUser = async (userObj) => {
 
     var user = new User({
         userName: userObj.userName,
+        role:userObj.role,
         email: userObj.email,
-        bio: userObj.bio,
-        password: userObj.password
+        password: userObj.password,
     })
 
     const salt = bcrypt.genSaltSync(10)
     try {
-        const result = await Joi.validate(userObj, userSchema, { abortEarly: false })
+        // const result = await Joi.validate(userObj, userSchema, { abortEarly: false })
         user.password = await bcrypt.hash(user.password, salt)
     } catch (error) {
         console.log(error);
